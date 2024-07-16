@@ -1,0 +1,152 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 200px;
+}
+
+.card {
+  width: 300px;
+  height: 400px;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #595959;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background-color: var(--card-background-color);
+}
+
+.heartIcon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  color: #ce2db1;
+  transition: color 0.3s ease;
+}
+
+.heartIcon:hover {
+  color: #ff0080;
+}
+
+.imageContainer {
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+}
+
+.card img {
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  margin-left: 18%;
+}
+
+.name {
+  margin-top: 40px;
+  margin-bottom: 0px;
+}
+
+.info {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.typesAbilities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+}
+
+.type,
+.ability {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.type {
+  background-color: var(--type-background);
+  color: #000;
+}
+
+.ability {
+  background-color: var(--ability-background);
+}
+
+.buttons {
+  position: absolute;
+  bottom: 20px;
+  width: calc(100% - 40px);
+  display: flex;
+  justify-content: space-between;
+}
+
+.likeButton,
+.dislikeButton {
+  padding: 10px 20px;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.likeButton {
+  background-color: var(--button-background);
+  color: var(--text-color);
+  border-color: var(--text-color);
+
+  font-family: "Comic Neue";
+  font-size: 16px;
+}
+
+.dislikeButton {
+  background-color: var(--button-dislike-background-color);
+  color: var(--text-color);
+  border-color: var(--text-color);
+
+  font-family: "Comic Neue";
+  font-size: 16px;
+}
+
+.likedLinkContainer {
+  margin-top: 60px;
+}
+
+.likedLink {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #1f8bff;
+  color: var(--text-color);
+  border-color: var(--text-color);
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+}
