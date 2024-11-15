@@ -14,7 +14,7 @@ const Card = ({ addLikedPokemon, fromLikedPage }) => {
 
   useEffect(() => {
     fetchRandomPokemonData();
-  }, []);
+  }, [fetchRandomPokemonData]);
 
   useEffect(() => {
     if (fromLikedPage) {
