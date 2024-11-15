@@ -10,7 +10,7 @@ import SwipableCard from "./SwipableCard";
 const Card = ({ addLikedPokemon, fromLikedPage }) => {
   const [pokemon, setPokemon] = useState(null);
   const [shownPokemonIds, setShownPokemonIds] = useState([]);
-  const [likedCount, setLikedCount] = useState(0);
+  const [likedCount, setLikedCount] = useState(0); // Line 13
   const [loading, setLoading] = useState(true);
   const [showLikedLink, setShowLikedLink] = useState(false);
 
@@ -86,6 +86,10 @@ const Card = ({ addLikedPokemon, fromLikedPage }) => {
           handleDislike={handleDislike}
         />
       )}
+      {/* Display the liked count */}
+      <div className={styles.likedCountContainer}>
+        <p>You have liked {likedCount} Pokémon.</p>
+      </div>
       {showLikedLink && (
         <div className={styles.likedLinkContainer}>
           <Link to="/liked" className={styles.likedLink}>
