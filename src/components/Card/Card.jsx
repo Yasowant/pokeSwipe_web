@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+// src/components/Card/Card.jsx
+
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import styles from "./Card.module.css";
@@ -12,37 +14,58 @@ const Card = ({ addLikedPokemon, fromLikedPage }) => {
   const [loading, setLoading] = useState(true);
   const [showLikedLink, setShowLikedLink] = useState(false);
 
-  useEffect(() => {
-    fetchRandomPokemonData();
-  }, [fetchRandomPokemonData]);
-
-  useEffect(() => {
-    if (fromLikedPage) {
-      setShowLikedLink(true);
-    }
-  }, [fromLikedPage]);
-
-  const fetchRandomPokemonData = async () => {
+  /**
+   * fetchRandomPokemonData is responsible for fetching a random Pokémon.
+   * It's wrapped in useCallback to prevent unnecessary re-creations.
+   */
+  const fetchRandomPokemonData = useCallback(async () => {
     setLoading(true);
     try {
       const pokemonData = await fetchRandomPokemon(shownPokemonIds);
       setPokemon(pokemonData);
-      setShownPokemonIds([...shownPokemonIds, pokemonData.id]);
+      setShownPokemonIds((prevIds) => [...prevIds, pokemonData.id]);
     } catch (error) {
       console.error("Error fetching Pokémon data:", error);
       setPokemon(null);
     } finally {
       setLoading(false);
     }
-  };
+  }, [shownPokemonIds]);
 
-  const handleLike = () => {
-    addLikedPokemon(pokemon);
-    setLikedCount(likedCount + 1);
-    setShowLikedLink(true);
+  /**
+   * useEffect to fetch Pokémon data when the component mounts
+   * or when fetchRandomPokemonData changes (which happens when shownPokemonIds updates).
+   */
+  useEffect(() => {
     fetchRandomPokemonData();
+  }, [fetchRandomPokemonData]);
+
+  /**
+   * useEffect to determine if the "Go to Liked Pokémon" link should be displayed
+   * based on the fromLikedPage prop.
+   */
+  useEffect(() => {
+    if (fromLikedPage) {
+      setShowLikedLink(true);
+    }
+  }, [fromLikedPage]);
+
+  /**
+   * handleLike adds the current Pokémon to the liked list,
+   * increments the liked count, shows the liked link, and fetches a new Pokémon.
+   */
+  const handleLike = () => {
+    if (pokemon) {
+      addLikedPokemon(pokemon);
+      setLikedCount((prevCount) => prevCount + 1);
+      setShowLikedLink(true);
+      fetchRandomPokemonData();
+    }
   };
 
+  /**
+   * handleDislike simply fetches a new Pokémon without altering the liked list.
+   */
   const handleDislike = () => {
     fetchRandomPokemonData();
   };
